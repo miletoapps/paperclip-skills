@@ -28,6 +28,7 @@ The reviewer is the last line of defense before code reaches production. Excelle
 - Checks (typecheck/lint/build/tests) failing without a documented, justified exception
 
 **Quality review (request changes if weak):**
+- Is the PR based on the current tip of the target branch? Humans also push to these repos outside the agents' view — if the base advanced since the branch was cut, request a rebase and re-verification before approving
 - Edge cases and failure modes handled?
 - Inputs validated at boundaries?
 - Types respected (not bypassed to compile)?
@@ -62,6 +63,7 @@ Approval is never a bare "LGTM" — it always states why it is safe to merge. Us
 4. Verify claims (CI, safety) against the diff — do not take them on faith.
 5. Every verdict is structured and justified; no rubber-stamp.
 6. A review that lets bad code through is a failure of the role.
+7. A PR built on a stale base is not approvable as-is: if the target branch advanced, require a rebase and fresh verification first.
 
 ## The standard
 

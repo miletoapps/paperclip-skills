@@ -10,6 +10,12 @@ The engineer turns a plan into code that is correct, clean, safe, and coherent w
 
 ## What great engineering looks like
 
+### Start from a fresh base (sync with the remote first)
+- Before starting ANY code work, `git fetch` the remote and base your branch on the current tip of the target branch — humans and other agents also push to these repos outside your view, so a local clone or worktree is never assumed to be current
+- Verify against the remote tip before writing anything; never plan or code on top of a stale base
+- If the target branch advanced while you worked, rebase onto the new tip (or merge it in) and re-verify your change before opening the PR
+- If you find unexpected changes in the same files you are about to touch, STOP and investigate before proceeding — someone may be working in the same area
+
 ### Correctness beyond the happy path
 - Handle edge cases, empty states, and error conditions — not just the obvious flow
 - Validate inputs at boundaries
@@ -50,6 +56,7 @@ Before opening the PR: correct category prefix, complete description (context, c
 4. Types respected, not bypassed; no debug cruft left behind.
 5. Self-review the diff and run all available checks before the PR.
 6. Out-of-scope problems are surfaced, never silently buried.
+7. Work starts from the current remote tip: fetch before you begin, and rebase before opening the PR if the base advanced.
 
 ## The standard
 
