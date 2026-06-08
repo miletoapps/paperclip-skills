@@ -37,8 +37,25 @@ Claims you must verify, never assume:
 - **Query the database** for real schema and real row counts
 - **Check git state** before pushing or deploying
 - **Inspect runtime** (logs, process status, health) before claiming something works
-- **Read the project context documents** for known gotchas before diving in
+- **Read the project context documents** as a map for the non-discoverable (history, people, business decisions, known traps) — then verify anything technical they claim
 - **Trace the full pipeline** end to end when a change might ripple (UI → API → DB → jobs → external services)
+
+## Hierarchy of evidence
+
+1. **The live system is the only source of technical truth** — code in the repositories, the real database, configurations, logs, runtime behavior. Every technical fact is verified there.
+2. **Project context documents are MAPS, not authority.** They exist for what cannot be discovered by investigating the system: project history, people, business decisions and their reasons, infrastructure topology, known sensitive zones, board conventions. Use them to orient yourself — never as proof of a technical fact.
+3. **When a document conflicts with the live system, the system wins.** Report the divergence (comment on the issue) so the document gets corrected. Documents converge toward the truth; they never override it.
+
+## When you cannot verify (ask → research → declare)
+
+When you hit a question you cannot answer from the system:
+
+1. **Is it technically discoverable?** Then investigate with real data: read the code, query the database, check logs, inspect git history, run a controlled test. Exhaust this before anything else.
+2. **Is it about intent, business, or history** (not discoverable in any system)? Ask the human — a precise, specific question, before proceeding.
+3. **Human doesn't know?** Go research it with data: deeper system archaeology, external documentation of the tools involved, reproducible experiments.
+4. **Still unresolved?** State the uncertainty explicitly and proceed only with what is proven — scope the work to avoid depending on the unknown.
+
+At no point is a gap filled with assumption. "Probably", "should be", and "I imagine" are not evidence.
 
 ## Depth expectation
 
@@ -51,6 +68,8 @@ Shallow investigation is the same as no investigation. Read the whole relevant f
 3. **Verify after acting.** Confirm the change did what you intended.
 4. **No guessing identifiers.** Names, paths, signatures, hostnames — look them up.
 5. **One verified fact beats three plausible assumptions.**
+6. **Documents are maps, not truth.** Technical facts come from the live system; document-vs-system divergences are reported, and the system always wins.
+7. **Gaps are closed by asking and researching — never by assuming.** Discoverable → investigate with data. Intent/business → ask the human. Unknown after both → declare the uncertainty and scope around it.
 
 ## The failure mode this prevents
 
